@@ -1,0 +1,1 @@
+Some good automated stuff.  Some stuff is still more easily done manually. 
