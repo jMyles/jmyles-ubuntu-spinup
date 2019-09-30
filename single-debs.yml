@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install Discord
+      apt:
+        deb: https://discordapp.com/api/download/ptb?platform=linux&format=deb
+    - name: Install Steam
+      apt:
+        deb: https://steamcdn-a.akamaihd.net/client/installer/steam.deb

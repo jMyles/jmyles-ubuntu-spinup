@@ -1,0 +1,98 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Add Riot Keyring
+      get_url:
+        dest: /usr/share/keyrings/riot-im-archive-keyring.gpg
+        url: https://packages.riot.im/debian/riot-im-archive-keyring.gpg
+    - name: Add Signal Keyring
+      shell: "curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -"
+    - name: Add repos
+      apt_repository:
+        repo: "{{ item }}"
+      loop:
+        - ppa:libretro/stable
+        - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
+        - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+        - ppa:openshot.developers/ppa
+      register: repos
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: repos.changed
+    - name: Install apt packages
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - signal-desktop
+        - riot-web
+        - git
+        - gimp
+        - htop
+        - sshfs
+        - ubuntu-restricted-extras
+        - va-driver-all
+        - vainfo
+        - libva2
+        - gstreamer1.0-libav
+        - gstreamer1.0-vaapi
+        - vlc
+        - python3-pip
+        - lsb-release
+        - apt-transport-https
+        - gdmap
+        - inkscape
+        - retroarch*
+        - libgl1-mesa-glx:i386
+        - openshot-qt
+    - name: Remove Things
+      apt:
+        name: "{{ packages }}"
+        state: absent
+        purge: yes
+      vars:
+        packages:
+        - rhythmbox
+        - ubuntu-web-launchers
+    - name: Install pip3 packages
+      pip:
+        executable: pip3
+        name:
+          - ipython
+          - requests
+          - ansible
+          - pipenv
+          - youtube-dl
+    - name: Install PyCharm Pro
+      snap:
+        classic: yes
+        name: pycharm-professional
+    - name: Clone github repos
+      become_user: jmyles
+      git:
+        repo: git@github.com:{{item}}.git
+        dest: ~/projects/{{item}}
+        remote: upstream
+        key_file: ~/.ssh/id_rsa
+        accept_hostkey: yes
+      loop:
+        - nucypher/nucypher
+        - nucypher/pyumbral
+        - nucypher/bytestringSplitter
+        - nucypher/constantSorrow
+        - thisisthebus/thisisthebus
+        - thisisthebus/stray_electrons
+    - name: Delete Amazon Stuff
+      file:
+        path: /usr/share/applications/ubuntu-amazon-default.desktop
+        state: absent
+    - name: Delete more Amazon Stuff
+      file:
+        path: /usr/share/unity-webapps/userscripts/unity-webapps-amazon
+        state: absent
+
+
+# veracrypt, openshot, add ssh key to github
+
+
