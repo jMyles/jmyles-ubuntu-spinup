@@ -1,0 +1,61 @@
+---
+- hosts: localhost
+  vars:
+    github_username: jMyles
+    os_username: jmyles
+  tasks:
+    - name: Clone github repos
+      become_user: "{{os_username}}"
+      become: yes
+      git:
+        repo: git@github.com:{{item}}.git
+        dest: ~/projects/{{item}}
+        remote: upstream
+        key_file: ~/.ssh/id_rsa
+        accept_hostkey: yes
+      loop:
+        - nucypher/nucypher
+        - nucypher/pyumbral
+        - nucypher/bytestringSplitter
+        - nucypher/constantSorrow
+        - thisisthebus/thisisthebus
+        - thisisthebus/stray_electrons
+    - name: Add github repo remotes for NuCypher
+      become_user: "{{os_username}}"
+      become: yes
+      shell: "git remote add {{item}} git@github.com:{{item}}/nucypher.git; git fetch {{item}}"
+      args:
+        chdir: ~/projects/nucypher/nucypher
+      loop:
+        - KPrasch
+        - jMyles
+        # - tuxxy
+        - cygnusv
+        # - szotov
+        - michwill
+        - vepkenez
+        - derekpierre
+        - mswilkison
+        # - arjunhassard
+    - name: Add github repo remotes for pyUmbral
+      become_user: "{{os_username}}"
+      become: yes
+      shell: "git remote add {{item}} git@github.com:{{item}}/pyumbral.git; git fetch {{item}}"
+      args:
+        chdir: ~/projects/nucypher/pyumbral
+      loop:
+        - KPrasch
+        - jMyles
+        - tuxxy
+        - cygnusv
+        - michwill
+        - mswilkison
+    - name: Add github repo remotes for bytestringSplitter
+      become_user: "{{os_username}}"
+      become: yes
+      shell: "git remote add {{item}} git@github.com:{{item}}/bytestringSplitter.git; git fetch {{item}}"
+      args:
+        chdir: ~/projects/nucypher/bytestringSplitter
+      loop:
+        - KPrasch
+        - jMyles

@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  vars:
+    os_username: jmyles
+  tasks:
+    - name: Add repos
+      apt_repository:
+        repo: "{{ item }}"
+      loop:
+        - ppa:libretro/stable
+        - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
+        - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+#        - ppa:openshot.developers/ppa
+#        - ppa:unit193/encryption
+      register: repos
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: repos.changed
+    - name: Install apt packages
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - libasound2-dev
+        - libjack-dev

@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  vars:
+    os_username: jmyles
+  tasks:
+    - name: Stop docker in order to install rootless.
+      systemd:
+        name: docker
+        state: stopped
+    - name: Install rootless docker
+      become_user: "{{os_username}}"
+      become: yes
+      command: "curl -fsSL https://get.docker.com/rootless | sh"
+      register: command_result
+      failed_when: "'FAILED' in command_result.stderr"
+    - name: Linger Docker
+      become: yes
+      shell: "loginctl enable-linger {{os_username}}"
+    - name: Start docker
+      systemd:
+        name: docker
+        state: restarted
+        scope: user

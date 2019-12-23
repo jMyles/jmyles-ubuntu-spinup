@@ -1,12 +1,25 @@
 ---
 - hosts: localhost
+  vars:
+    os_username: jmyles
+    git_name: jMyles
+    email_address: justin@justinholmes.com
   tasks:
+    - name: Set default git identity
+      become_user: "{{os_username}}"
+      become: yes
+      shell: 'git config --global user.email "{{email_address}}"; git config --global user.name "{{git_name}}"'
     - name: Add Riot Keyring
       get_url:
         dest: /usr/share/keyrings/riot-im-archive-keyring.gpg
         url: https://packages.riot.im/debian/riot-im-archive-keyring.gpg
     - name: Add Signal Keyring
-      shell: "curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -"
+      apt_key:
+        url: https://updates.signal.org/desktop/apt/keys.asc
+    - name: Add Docker Keyring
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     - name: Add repos
       apt_repository:
         repo: "{{ item }}"
@@ -14,7 +27,9 @@
         - ppa:libretro/stable
         - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
         - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
-        - ppa:openshot.developers/ppa
+        - "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
+#        - ppa:openshot.developers/ppa
+#        - ppa:unit193/encryption
       register: repos
     - name: Update apt cache
       apt:
@@ -46,6 +61,26 @@
         - retroarch*
         - libgl1-mesa-glx:i386
         - openshot-qt
+        - build-essential
+        - gcc
+        - veracrypt
+        - guvcview
+        - chromium-browser
+        - samba
+        - net-tools
+        - smbclient
+        - adb
+        - spek
+        - audacity
+        - sonic-visualiser
+        - macchanger
+        - nmap
+        - gparted
+        - mesa-utils
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - uidmap
     - name: Remove Things
       apt:
         name: "{{ packages }}"
@@ -64,25 +99,11 @@
           - ansible
           - pipenv
           - youtube-dl
+          - magic-wormhole
     - name: Install PyCharm Pro
       snap:
         classic: yes
         name: pycharm-professional
-    - name: Clone github repos
-      become_user: jmyles
-      git:
-        repo: git@github.com:{{item}}.git
-        dest: ~/projects/{{item}}
-        remote: upstream
-        key_file: ~/.ssh/id_rsa
-        accept_hostkey: yes
-      loop:
-        - nucypher/nucypher
-        - nucypher/pyumbral
-        - nucypher/bytestringSplitter
-        - nucypher/constantSorrow
-        - thisisthebus/thisisthebus
-        - thisisthebus/stray_electrons
     - name: Delete Amazon Stuff
       file:
         path: /usr/share/applications/ubuntu-amazon-default.desktop

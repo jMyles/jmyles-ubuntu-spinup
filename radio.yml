@@ -1,0 +1,62 @@
+---
+- hosts: localhost
+  vars:
+    os_username: jmyles
+  tasks:
+    - name: Add repos
+      apt_repository:
+        repo: "{{ item }}"
+      loop:
+        - ppa:libretro/stable
+        - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
+        - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+#        - ppa:openshot.developers/ppa
+#        - ppa:unit193/encryption
+      register: repos
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: repos.changed
+    - name: Install apt packages
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - gnuradio-dev
+        - protobuf-compiler
+        - gr-osmosdr
+        - gnuradio
+        - libvolk1-dev
+        - libvolk1-bin
+        - libprotobuf17
+        - libprotobuf-dev
+        - libopus0
+        - libopus-dev
+        - libspeexdsp1
+        - libspeexdsp-dev
+        - libpulse0
+        - libpulse-dev
+        - libcodec2-0.8.1
+        - libcodec2-dev
+        - libasound2
+        - libasound2-dev
+        - libjpeg-turbo8-dev
+        - libjpeg-dev
+        - libconfig++9v5
+        - libconfig++-dev
+        - qt5-qmake
+        - qt5-default
+        - qtbase5-dev
+        - libqt5core5a
+        - libqt5gui5
+        - libqt5network5
+        - libqt5sql5
+        - qtmultimedia5-dev
+        - libqt5multimediawidgets5
+        - libqt5multimedia5-plugins
+        - libqt5multimedia5
+        - libftdi1-dev
+        - libftdi1
+        - libsndfile1-dev
+        - libsndfile1
+        - libftdi-dev 
