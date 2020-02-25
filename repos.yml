@@ -13,6 +13,7 @@
         remote: upstream
         key_file: ~/.ssh/id_rsa
         accept_hostkey: yes
+        update: no
       loop:
         - nucypher/nucypher
         - nucypher/pyumbral
@@ -20,6 +21,7 @@
         - nucypher/constantSorrow
         - thisisthebus/thisisthebus
         - thisisthebus/stray_electrons
+        - hendrix/hendrix
     - name: Add github repo remotes for NuCypher
       become_user: "{{os_username}}"
       become: yes
@@ -37,6 +39,16 @@
         - derekpierre
         - mswilkison
         # - arjunhassard
+    - name: Add github repo remotes for hendrix
+      become_user: "{{os_username}}"
+      become: yes
+      shell: "git remote add {{item}} git@github.com:{{item}}/hendrix.git; git fetch {{item}}"
+      args:
+        chdir: ~/projects/hendrix/hendrix
+      loop:
+        - KPrasch
+        - jMyles
+        - vepkenez
     - name: Add github repo remotes for pyUmbral
       become_user: "{{os_username}}"
       become: yes
