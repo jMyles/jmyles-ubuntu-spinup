@@ -10,6 +10,7 @@
         - ppa:libretro/stable
         - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
         - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+        - ppa:myriadrf/drivers
 #        - ppa:openshot.developers/ppa
 #        - ppa:unit193/encryption
       register: repos
@@ -59,4 +60,16 @@
         - libftdi1
         - libsndfile1-dev
         - libsndfile1
-        - libftdi-dev 
+        - libftdi-dev
+        - cmake
+        - g++
+        - libpython-dev
+        - python-numpy
+        - swig
+        - libgtk2.0-dev
+        - hackrf
+        - libhackrf-dev
+
+#  https://www.wxwidgets.org/downloads/
+# https://github.com/pothosware/SoapySDR/wiki/BuildGuide#ubuntu
+# https://www.ab9il.net/software-defined-radio/cubicsdr.html
