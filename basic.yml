@@ -63,7 +63,7 @@
         - openshot-qt
         - build-essential
         - gcc
-        - veracrypt
+        # - veracrypt
         - guvcview
         - chromium-browser
         - samba
