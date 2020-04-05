@@ -5,3 +5,6 @@ mkdir projects
 cd projects
 git clone git@github.com:jMyles/jmyles-ubuntu-spinup.git
 cd jmyles-ubuntu-spinup
+echo "alias pretty=\"git log --pretty='%C(yellow)%h %<(10,trunc)%Cgreen%aN %Cred%d %Creset %<(80,trunc)%s'\"" >> ~/.bashrc
+echo "alias jholmes=\"ssh -o 'StrictHostKeyChecking no' 'jmyles_justinholmescom@ssh.phx.nearlyfreespeech.net'\"" >> ~/.bashrc
+echo "export jh.com=jmyles_justinholmescom@ssh.phx.nearlyfreespeech.net" >> ~/.bashrc

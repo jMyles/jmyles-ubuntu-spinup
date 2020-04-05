@@ -11,6 +11,7 @@
         - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
         - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         - ppa:myriadrf/drivers
+        - ppa:dansmith/chirp-snapshots
 #        - ppa:openshot.developers/ppa
 #        - ppa:unit193/encryption
       register: repos
@@ -69,6 +70,32 @@
         - libgtk2.0-dev
         - hackrf
         - libhackrf-dev
+        - chirp-daily
+        - libtool
+        - libfftw3-dev
+        - libusb-1.0-0-dev
+        - libusb-dev
+        - qt5-default
+        - qtbase5-dev
+        - qtchooser
+        - libqt5multimedia5-plugins
+        - qtmultimedia5-dev
+        - libqt5websockets5-dev
+        - qttools5-dev
+        - qttools5-dev-tools
+        - libqt5opengl5-dev
+        - qtbase5-dev
+        - libboost-all-dev
+        - libasound2-dev
+        - pulseaudio
+        - libopencv-dev
+        - libxml2-dev
+        - bison
+        - flex
+        - ffmpeg
+        - libavcodec-dev
+        - libavformat-dev
+        - libopus-dev
 
 #  https://www.wxwidgets.org/downloads/
 # https://github.com/pothosware/SoapySDR/wiki/BuildGuide#ubuntu

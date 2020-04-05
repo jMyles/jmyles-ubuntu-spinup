@@ -81,6 +81,8 @@
         - docker-ce-cli
         - containerd.io
         - uidmap
+        - texlive
+        - texlive-full
     - name: Remove Things
       apt:
         name: "{{ packages }}"
@@ -90,6 +92,7 @@
         packages:
         - rhythmbox
         - ubuntu-web-launchers
+        - gnome-orca
     - name: Install pip3 packages
       pip:
         executable: pip3

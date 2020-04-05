@@ -21,7 +21,9 @@
         - nucypher/constantSorrow
         - thisisthebus/thisisthebus
         - thisisthebus/stray_electrons
+        - thisisthebus/thisisthesitebuilder
         - hendrix/hendrix
+        - microsoft/SEAL
     - name: Add github repo remotes for NuCypher
       become_user: "{{os_username}}"
       become: yes
@@ -70,4 +72,13 @@
         chdir: ~/projects/nucypher/bytestringSplitter
       loop:
         - KPrasch
+        - jMyles
+    - name: Add github repo remotes for SEAL
+      become_user: "{{os_username}}"
+      become: yes
+      shell: "git remote add {{item}} git@github.com:{{item}}/SEAL.git; git fetch {{item}}"
+      args:
+        chdir: ~/projects/microsoft/SEAL
+      loop:
+        - microsoft
         - jMyles
