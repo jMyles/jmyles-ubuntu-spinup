@@ -9,10 +9,6 @@
       become_user: "{{os_username}}"
       become: yes
       shell: 'git config --global user.email "{{email_address}}"; git config --global user.name "{{git_name}}"'
-    - name: Add Riot Keyring
-      get_url:
-        dest: /usr/share/keyrings/riot-im-archive-keyring.gpg
-        url: https://packages.riot.im/debian/riot-im-archive-keyring.gpg
     - name: Add Signal Keyring
       apt_key:
         url: https://updates.signal.org/desktop/apt/keys.asc
@@ -25,7 +21,6 @@
         repo: "{{ item }}"
       loop:
         - ppa:libretro/stable
-        - "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ disco main"
         - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         - "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
 #        - ppa:openshot.developers/ppa
@@ -41,7 +36,6 @@
       vars:
         packages:
         - signal-desktop
-        - riot-web
         - git
         - gimp
         - htop
@@ -70,7 +64,6 @@
         - net-tools
         - smbclient
         - adb
-        - spek
         - audacity
         - sonic-visualiser
         - macchanger
