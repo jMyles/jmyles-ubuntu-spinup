@@ -1,1 +1,1 @@
-firefox https://addons.mozilla.org/en-US/firefox/addon/umatrix/ https://addons.mozilla.org/en-US/firefox/addon/dark-night-mode/
+firefox https://addons.mozilla.org/en-US/firefox/addon/umatrix/ https://addons.mozilla.org/en-US/firefox/addon/dark-night-mode/ https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/ https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/ https://github.com/kristerkari/umatrix-recipes

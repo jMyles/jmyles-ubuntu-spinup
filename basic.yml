@@ -20,6 +20,7 @@
       apt_repository:
         repo: "{{ item }}"
       loop:
+        - ppa:mumble/release
         - ppa:libretro/stable
         - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         - "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
@@ -76,6 +77,7 @@
         - uidmap
         - texlive
         - texlive-full
+        - mumble
     - name: Remove Things
       apt:
         name: "{{ packages }}"

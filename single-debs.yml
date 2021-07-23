@@ -7,3 +7,6 @@
     - name: Install Steam
       apt:
         deb: https://steamcdn-a.akamaihd.net/client/installer/steam.deb
+    - name: VS Code
+      apt:
+        deb: https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
