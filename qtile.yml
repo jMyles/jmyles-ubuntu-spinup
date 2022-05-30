@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  vars:
+    os_username: jmyles
+    git_name: jMyles
+    email_address: justin@justinholmes.com
+  tasks:
+    - name: Install apt packages
+      apt:
+        update_cache: yes
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - python3-cffi
+        - libwlroots-dev
+        - python3-cairocffi
+        - libpangocairo-1.0-0

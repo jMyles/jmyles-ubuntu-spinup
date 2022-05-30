@@ -11,6 +11,14 @@ Here's what we do:
 * Check email for dashlane code
 * sudo ansible-playbook single-debs.yml -vvvv
 * sudo ansible-playbook basic.yml -vvvv
-* ./set-favs.sh
+* sudo ansible-playbook repos.yml -vvvv
+./browser-extensions.sh
 
 Copy PyCharm config
+Set Default browser
+
+TODO:
+* oled
+  * Arc-BLACKEST
+  * black background
+
