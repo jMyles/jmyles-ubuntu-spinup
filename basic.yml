@@ -23,8 +23,6 @@
         - ppa:libretro/stable
         - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         - "deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable"
-#        - ppa:openshot.developers/ppa
-#        - ppa:unit193/encryption
       register: repos
     - name: Update apt cache
       apt:
@@ -54,11 +52,9 @@
         - gdmap
         - inkscape
         - retroarch*
-        - libgl1-mesa-glx:i386
         - openshot-qt
         - build-essential
         - gcc
-        # - veracrypt
         - guvcview
         - chromium-browser
         - samba
@@ -79,20 +75,18 @@
         - texlive-full
         - cmake
         - flatpak
-    - name: Install authy snap
+        - magic-wormhole
+    - name: Install snaps (discord and telegram)
       community.general.snap:
         name:
-          - authy
+          - discord
+          - telegram-desktop
     - name: Add the flathub flatpak repository remote to the user installation
       community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
         method: user
-    - name: Install Telegram via flatpak
-      community.general.flatpak:
-        name: org.telegram.desktop
-        state: present
     - name: Remove Things
       apt:
         name: "{{ packages }}"
@@ -103,16 +97,7 @@
         - rhythmbox
         - ubuntu-web-launchers
         - gnome-orca
-    - name: Install pip3 packages
-      pip:
-        executable: pip3
-        name:
-          - ipython
-          - requests
-          - ansible
-          - pipenv
-          - youtube-dl
-          - magic-wormhole
+    # yt-dlp?
     - name: Install PyCharm Pro
       snap:
         classic: yes
