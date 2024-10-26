@@ -15,72 +15,25 @@
         accept_hostkey: yes
         update: no
       loop:
-        - nucypher/nucypher
-        - nucypher/pyumbral
-        - nucypher/bytestringSplitter
-        - nucypher/constantSorrow
-        - jMyles/justinholmes.com
-        - jMyles/jmyles-ubuntu-spinup
-        - thisisthebus/thisisthebus
-        - thisisthebus/stray_electrons
-        - thisisthebus/thisisthesitebuilder
-        - hendrix/hendrix
-        - microsoft/SEAL
-    - name: Add github repo remotes for NuCypher
+        - JustinHolmesMusic/justinholmes.com
+        - JustinHolmesMusic/blox-office
+    - name: Add github repo remotes for justinholmes.com
       become_user: "{{os_username}}"
       become: yes
-      shell: "git remote add {{item}} git@github.com:{{item}}/nucypher.git; git fetch {{item}}"
+      shell: "git remote add {{item}} git@github.com:{{item}}/justinholmes.com.git; git fetch {{item}}"
       args:
-        chdir: ~/projects/nucypher/nucypher
+        chdir: ~/projects/JustinHolmesMusic/justinholmes.com
       loop:
-        - KPrasch
+        - kubic71
         - jMyles
-        # - tuxxy
-        - cygnusv
-        # - szotov
-        - michwill
-        - vepkenez
-        - derekpierre
-        - mswilkison
-        # - arjunhassard
-    - name: Add github repo remotes for hendrix
-      become_user: "{{os_username}}"
-      become: yes
-      shell: "git remote add {{item}} git@github.com:{{item}}/hendrix.git; git fetch {{item}}"
-      args:
-        chdir: ~/projects/hendrix/hendrix
-      loop:
         - KPrasch
-        - jMyles
-        - vepkenez
-    - name: Add github repo remotes for pyUmbral
+        - rjpartingtoniii
+    - name: Add github repo remotes for blox-office
       become_user: "{{os_username}}"
       become: yes
-      shell: "git remote add {{item}} git@github.com:{{item}}/pyumbral.git; git fetch {{item}}"
+      shell: "git remote add {{item}} git@github.com:{{item}}/blox-office`.git; git fetch {{item}}"
       args:
-        chdir: ~/projects/nucypher/pyumbral
+        chdir: ~/projects/JustinHolmesMusic/justinholmes.com
       loop:
-        - KPrasch
-        - jMyles
-        - tuxxy
-        - cygnusv
-        - michwill
-        - mswilkison
-    - name: Add github repo remotes for bytestringSplitter
-      become_user: "{{os_username}}"
-      become: yes
-      shell: "git remote add {{item}} git@github.com:{{item}}/bytestringSplitter.git; git fetch {{item}}"
-      args:
-        chdir: ~/projects/nucypher/bytestringSplitter
-      loop:
-        - KPrasch
-        - jMyles
-    - name: Add github repo remotes for SEAL
-      become_user: "{{os_username}}"
-      become: yes
-      shell: "git remote add {{item}} git@github.com:{{item}}/SEAL.git; git fetch {{item}}"
-      args:
-        chdir: ~/projects/microsoft/SEAL
-      loop:
-        - microsoft
+        - kubic71
         - jMyles
